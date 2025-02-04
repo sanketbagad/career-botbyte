@@ -4,7 +4,7 @@ import { sendEmail } from "@/lib/emailSender"
 import { getUserEmailTemplate, getAdminEmailTemplate } from "@/lib/emailTemplates"
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
+const supabaseServiceRoleKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey, {
   auth: {
@@ -76,7 +76,7 @@ export async function POST(request: Request) {
     console.error("Failed to send email:", error)
     // Note: We're not returning an error response here because the application was successfully submitted
     // You might want to log this error or handle it differently based on your requirements
-  }
+}
 
   return NextResponse.json({ success: true, application: data[0] })
 }
