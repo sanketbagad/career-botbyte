@@ -18,5 +18,5 @@ model Application {
   experience String?
   expectations String?
   createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  updatedAt  DateTime @updatedAt @default(now())
 }

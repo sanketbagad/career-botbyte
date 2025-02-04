@@ -10,15 +10,16 @@ interface ApplicationData {
   coverLetter: string
   experience: string
   expectations: string
+  agreeToEmail: boolean
 }
 
 interface ApplicationContextType {
   applicationData: ApplicationData
   updateApplicationData: (data: Partial<ApplicationData>) => void
-  submitApplication: () => Promise<void>
+  submitApplication: () => Promise<{ success: boolean; error?: string }>
 }
 
-const ApplicationContext: any = createContext<ApplicationContextType | undefined>(undefined)
+const ApplicationContext = createContext<ApplicationContextType | undefined>(undefined)
 
 export function ApplicationProvider({ children }: { children: ReactNode }) {
   const [applicationData, setApplicationData] = useState<ApplicationData>({
@@ -29,6 +30,7 @@ export function ApplicationProvider({ children }: { children: ReactNode }) {
     coverLetter: "",
     experience: "",
     expectations: "",
+    agreeToEmail: false,
   })
 
   const updateApplicationData = (data: Partial<ApplicationData>) => {
@@ -48,11 +50,13 @@ export function ApplicationProvider({ children }: { children: ReactNode }) {
       body: formData,
     })
 
+    const result = await response.json()
+
     if (!response.ok) {
-      throw new Error("Failed to submit application")
+      return { success: false, error: result.error }
     }
 
-    return response.json()
+    return { success: true }
   }
 
   return (

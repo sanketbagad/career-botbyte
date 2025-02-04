@@ -5,27 +5,37 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useApplication } from "../../context/ApplicationContext"
 import { useRouter } from "next/navigation"
-import toast from "react-hot-toast"
-
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+import { AlertCircle } from "lucide-react"
 
 interface Step3Props {
   prevStep: () => void
 }
 
 export default function Step3({ prevStep }: Step3Props) {
-  const { applicationData, updateApplicationData, submitApplication } = useApplication() as any;
+  const { applicationData, updateApplicationData, submitApplication } = useApplication()
   const router = useRouter()
   const [resume, setResume] = useState<File | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError(null)
+    setLoading(true)
     try {
-      await submitApplication()
-      router.push("/success")
+      const result = await submitApplication()
+      if (result.success) {
+        setLoading(false)
+        router.push("/success")
+      } else {
+        setLoading(false)
+        setError(result.error || "An unexpected error occurred. Please try again.")
+      }
     } catch (error) {
       console.error("Failed to submit application:", error)
-      // alert("Failed to submit application. Please try again.")
-      toast.error("Failed to submit application. Please try again.")
+      setLoading(false)
+      setError("An unexpected error occurred. Please try again.")
     }
   }
 
@@ -38,6 +48,13 @@ export default function Step3({ prevStep }: Step3Props) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
       {applicationData.program === "internship" ? (
         <>
           <div>
@@ -55,6 +72,8 @@ export default function Step3({ prevStep }: Step3Props) {
               placeholder="Tell us why you're interested in this internship..."
               className="mt-2 h-32"
               required
+              value={applicationData.coverLetter}
+              onChange={(e) => updateApplicationData({ coverLetter: e.target.value })}
             />
           </div>
         </>
@@ -66,9 +85,11 @@ export default function Step3({ prevStep }: Step3Props) {
             </Label>
             <Textarea
               id="experience"
-              placeholder="Describe Any Language or Tech Stack You Are Interested In..."
+              placeholder="Describe your relevant experience..."
               className="mt-2 h-32"
               required
+              value={applicationData.experience}
+              onChange={(e) => updateApplicationData({ experience: e.target.value })}
             />
           </div>
           <div>
@@ -80,6 +101,8 @@ export default function Step3({ prevStep }: Step3Props) {
               placeholder="What do you hope to gain from this training program?"
               className="mt-2 h-32"
               required
+              value={applicationData.expectations}
+              onChange={(e) => updateApplicationData({ expectations: e.target.value })}
             />
           </div>
         </>
@@ -89,7 +112,7 @@ export default function Step3({ prevStep }: Step3Props) {
           Previous
         </Button>
         <Button type="submit" className="w-full sm:w-auto">
-          Submit Application
+          {loading ? "Submiting..." : "Submit Application"}
         </Button>
       </div>
     </form>
