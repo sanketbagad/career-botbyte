@@ -69,7 +69,7 @@ export async function POST(request: Request) {
 
   // Send emails
   try {
-    await sendEmail(email, "Application Received - TechInnovate Solutions", getUserEmailTemplate(name, program))
+    await sendEmail(email, "Application Received - Botbyte AI", getUserEmailTemplate(name, program))
 
     await sendEmail(process.env.ADMIN_EMAIL!, "New Application Submitted", getAdminEmailTemplate(name, email, program))
   } catch (error) {
