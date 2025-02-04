@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Application {
-  id         String   @id @default(cuid())
+  id         String   @id @default(autoincrement())
   name       String
   email      String
   program    String
