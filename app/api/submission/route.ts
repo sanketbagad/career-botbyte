@@ -1,4 +1,3 @@
-'use server'
 import { NextResponse } from "next/server"
 import { PrismaClient } from "@prisma/client"
 import { supabase } from "@/lib/supabase"

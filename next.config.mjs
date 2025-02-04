@@ -5,7 +5,10 @@ const nextConfig = {
  },
  eslint: {
     ignoreDuringBuilds: true
- }
+ },
+ experimental: {
+    suppressHydrationWarning: true,
+},
 };
 
 export default nextConfig;
