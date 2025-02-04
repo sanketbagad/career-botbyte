@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="bg-dark text-white-foreground mt-12 py-6 px-4">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center">
         <div className="text-sm mb-4 sm:mb-0">
-          © {new Date().getFullYear()} Botbyte AI. All rights reserved.
+          © {new Date().getFullYear()} Botbyte AI - By Sanket Bagad.
         </div>
         <div className="flex items-center">
           <Mail className="w-4 h-4 mr-2" />
