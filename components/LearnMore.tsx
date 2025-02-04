@@ -25,10 +25,10 @@ export default function LearnMore() {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Career Growth</CardTitle>
+            <CardTitle>Paid Internship</CardTitle>
           </CardHeader>
           <CardContent>
-            Develop skills that are in high demand and set yourself up for a successful tech career.
+           You will get paid for the work you do, based on your Interview.
           </CardContent>
         </Card>
         <Card>
