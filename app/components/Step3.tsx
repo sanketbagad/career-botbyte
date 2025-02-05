@@ -69,7 +69,7 @@ export default function Step3({ prevStep }: Step3Props) {
             </Label>
             <Textarea
               id="coverLetter"
-              placeholder="Tell us why you're interested in this internship..."
+              placeholder="Tell us why you're interested in this internship... or Put N/A"
               className="mt-2 h-32"
               required
               value={applicationData.coverLetter}
@@ -85,7 +85,7 @@ export default function Step3({ prevStep }: Step3Props) {
             </Label>
             <Textarea
               id="experience"
-              placeholder="Describe your relevant experience..."
+              placeholder="What Technical Skills do you have knowledge on? or N/A"
               className="mt-2 h-32"
               required
               value={applicationData.experience}
@@ -98,7 +98,7 @@ export default function Step3({ prevStep }: Step3Props) {
             </Label>
             <Textarea
               id="expectations"
-              placeholder="What do you hope to gain from this training program?"
+              placeholder="What do you hope to gain from this training program? or N/A"
               className="mt-2 h-32"
               required
               value={applicationData.expectations}
