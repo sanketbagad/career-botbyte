@@ -81,12 +81,12 @@ export default function Step3({ prevStep }: Step3Props) {
         <>
           <div>
             <Label htmlFor="experience" className="text-lg font-semibold">
-              Introduce Yourself
+              Mobile Number
             </Label>
-            <Textarea
+            <Input
               id="experience"
-              placeholder="Add your technical skills and please share your Mobile Number"
-              className="mt-2 h-32"
+              placeholder="Mobile Number"
+              className="mt-2"
               required
               value={applicationData.experience}
               onChange={(e) => updateApplicationData({ experience: e.target.value })}
