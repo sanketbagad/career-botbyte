@@ -81,11 +81,11 @@ export default function Step3({ prevStep }: Step3Props) {
         <>
           <div>
             <Label htmlFor="experience" className="text-lg font-semibold">
-              Relevant Experience
+              Introduce Yourself
             </Label>
             <Textarea
               id="experience"
-              placeholder="What Technical Skills do you have knowledge on? or N/A"
+              placeholder="Add your technical skills and please share your Mobile Number"
               className="mt-2 h-32"
               required
               value={applicationData.experience}
